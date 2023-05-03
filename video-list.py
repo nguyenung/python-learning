@@ -125,5 +125,5 @@ for dir in all_videos.keys():
 
 # Calculate and print total run time in seconds
 end_time = time.time()
-total_time_run = end_time - start_time
+total_time_run = int(end_time - start_time)
 print('===== Total time run: ', total_time_run, 'seconds')
