@@ -5,7 +5,7 @@ def get_input():
     This function listen prompt from keyboard. Allow only format `minutes:seconds`
     :return: The input from keyboard
     """
-    user_input = input('Enter a time in minutes:seconds format (or 'quit' to exit): ')
+    user_input = input("Enter a time in minutes:seconds format (or 'quit' to exit): ")
     if user_input.lower() == 'quit':
         raise SystemExit('Exit program...')
     if not re.match(r"\d+:\d{2}", user_input):
