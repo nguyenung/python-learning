@@ -2,6 +2,10 @@ import subprocess
 import json
 import re
 import argparse
+import sys
+
+# gh auth login
+# python3 read-commit.py aau-backend 1327 SMV
 
 def get_task_id_length(commit_message, task_prefix, only_number=False):
     task_prefix_with_dash = task_prefix + "-"
@@ -45,7 +49,9 @@ while True:
 
     # Gọi command và lấy kết quả đầu ra
     result = subprocess.run(command, capture_output=True, text=True)
+
     output = result.stdout
+
 
     # Kiểm tra xem đầu ra có dạng JSON hay không
     try:
@@ -57,6 +63,10 @@ while True:
     for commit in data:
         commit_message = commit.get("commit", {}).get("message")
         if commit_message.startswith("Merge pull reques"):
+            continue
+        if commit_message.startswith("Merge branch"):
+            continue
+        if commit_message.startswith("Merge remote-tracking"):
             continue
         # Check các commit message chứa jira task và get Task ID từ đó
         if check_format(commit_message, task_prefix):
